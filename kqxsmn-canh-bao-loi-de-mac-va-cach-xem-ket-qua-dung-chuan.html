@@ -201,37 +201,6 @@
             text-decoration: underline;
         }
 
-        /* Hộp tác giả */
-        .author-box {
-            background: #fdf2f2;
-            border: 1px solid #f5c6c6;
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .author-info h4 {
-            margin: 0 0 4px 0;
-            font-size: 1rem;
-            color: var(--primary-color);
-        }
-
-        .author-info p {
-            margin: 0;
-            font-size: 0.88rem;
-            color: #555;
-        }
-
         /* Khối Điều Hướng Bài Trước / Bài Sau */
         .post-navigation {
             display: flex;
@@ -347,10 +316,6 @@
             .article-title {
                 font-size: 1.4rem;
             }
-            .author-box {
-                flex-direction: column;
-                text-align: center;
-            }
             .post-navigation {
                 flex-direction: column;
                 gap: 12px;
@@ -390,7 +355,7 @@
                 <div class="article-meta">
                     <span>✍️ Tác giả: <strong>Ethan Vance</strong></span>
                     <span>📅 Đăng ngày: 08/10/2026</span>
-                    <span>⏱️ Thời gian đọc: 4 phút</span>
+                    <span>👁️ Lượt xem: 2,845</span>
                 </div>
             </header>
 
@@ -410,7 +375,6 @@
 
                 <p>Để không bỏ lỡ những giây phút hồi hộp khi quay số trực tiếp bà con cần nhớ rõ khung giờ quay thưởng của xổ số miền Nam là từ 16h10 đến 16h45 hàng ngày.</p>
 
-                Quote tóm tắt
                 <blockquote>
                     "Khung giờ quay thưởng trực tiếp XSMN diễn ra cố định từ 16h10 đến 16h45 hàng ngày."
                 </blockquote>
@@ -465,27 +429,30 @@
 
                 <p>Khi bà con có tin vui trúng thưởng sau khi đối chiếu kết quả <strong>KQXSMN</strong>, quý vị cần mang theo tờ vé số còn nguyên vẹn và giấy tờ tùy thân đến trực tiếp trụ sở các công ty để làm thủ tục nhận giải. Dưới đây là địa chỉ cụ thể của các công ty xổ số tại miền Nam:</p>
 
-                <p><strong>TP. Hồ Chí Minh:</strong> 77 Trần Nhân Tôn, Phường An Đông, TP. Hồ Chí Minh.</p>
-                <p><strong>Đồng Tháp:</strong> Số 01 Nguyễn Huệ, Phường Cao Lãnh, Tỉnh Đồng Tháp.</p>
-                <p><strong>Cà Mau:</strong> 09 Đường Phan Ngọc Hiển, Phường An Xuyên, Tỉnh Cà Mau.</p>
-                <p><strong>Bến Tre:</strong> Số 303A4, Đoàn Hoàng Minh, phường Phú Tân, tỉnh Vĩnh Long.</p>
-                <p><strong>Bà Rịa - Vũng Tàu:</strong> 31 Đường 3 Tháng 2, Phường Tam Thắng, TP. Hồ Chí Minh.</p>
-                <p><strong>Bạc Liêu:</strong> 07 Hai Bà Trưng, Phường Bạc Liêu, Tỉnh Cà Mau.</p>
-                <p><strong>Đồng Nai:</strong> 1894 Nguyễn Ái Quốc, Khu Phố 4, Phường Trấn Biên, Tỉnh Đồng Nai.</p>
-                <p><strong>Cần Thơ:</strong> Số 29, đường Cách Mạng Tháng Tám, phường Ninh Kiều, TP. Cần Thơ.</p>
-                <p><strong>Sóc Trăng:</strong> Số 16, Đường Trần Hưng Đạo, Phường Phú Lợi, TP. Cần Thơ.</p>
-                <p><strong>Tây Ninh:</strong> 315A Trần Hưng Đạo, Khu phố 1, Phường Tân Ninh, Tỉnh Tây Ninh.</p>
-                <p><strong>An Giang:</strong> 64C Nguyễn Thái Học, phường Long Xuyên, An Giang.</p>
-                <p><strong>Bình Thuận:</strong> 343 Võ Văn Kiệt, Phường Phú Thủy, Tỉnh Lâm Đồng.</p>
-                <p><strong>Vĩnh Long:</strong> 51E Nguyễn Trung Trực, phường Tân Hạnh, Tỉnh Vĩnh Long.</p>
-                <p><strong>Bình Dương:</strong> 01 Huỳnh Văn Nghệ, Phường Phú Lợi, TP. Hồ Chí Minh.</p>
-                <p><strong>Trà Vinh:</strong> Số 54A Phạm Ngũ Lão, Phường Trà Vinh, Tỉnh Vĩnh Long.</p>
-                <p><strong>Long An:</strong> Số 120, Tuyến tránh Quốc lộ 1, phường Long An, tỉnh Tây Ninh.</p>
-                <p><strong>Hậu Giang:</strong> Số 151, đường 3 tháng 2, phường Vị Tân, TP. Cần Thơ.</p>
-                <p><strong>Bình Phước:</strong> 725 Quốc lộ 14, phường Bình Phước, tỉnh Đồng Nai.</p>
-                <p><strong>Tiền Giang:</strong> S5 Thủ Khoa Huân, Phường Mỹ Tho, Tỉnh Đồng Tháp.</p>
-                <p><strong>Kiên Giang:</strong> Số 94 Đường 3 Tháng 2, Phường Rạch Giá, tỉnh An Giang.</p>
-                <p><strong>Lâm Đồng:</strong> Số 4 - 6 Hồ Tùng Mậu, Phường Xuân Hương - Đà Lạt, Tỉnh Lâm Đồng.</p>
+<ul>
+  <li><strong>TP. Hồ Chí Minh:</strong> 77 Trần Nhân Tôn, Phường An Đông, TP. Hồ Chí Minh.</li>
+  <li><strong>Đồng Tháp:</strong> Số 01 Nguyễn Huệ, Phường Cao Lãnh, Tỉnh Đồng Tháp.</li>
+  <li><strong>Cà Mau:</strong> 09 Đường Phan Ngọc Hiển, Phường An Xuyên, Tỉnh Cà Mau.</li>
+  <li><strong>Bến Tre:</strong> Số 303A4, Đoàn Hoàng Minh, phường Phú Tân, tỉnh Vĩnh Long.</li>
+  <li><strong>Bà Rịa - Vũng Tàu:</strong> 31 Đường 3 Tháng 2, Phường Tam Thắng, TP. Hồ Chí Minh.</li>
+  <li><strong>Bạc Liêu:</strong> 07 Hai Bà Trưng, Phường Bạc Liêu, Tỉnh Cà Mau.</li>
+  <li><strong>Đồng Nai:</strong> 1894 Nguyễn Ái Quốc, Khu Phố 4, Phường Trấn Biên, Tỉnh Đồng Nai.</li>
+  <li><strong>Cần Thơ:</strong> Số 29, đường Cách Mạng Tháng Tám, phường Ninh Kiều, TP. Cần Thơ.</li>
+  <li><strong>Sóc Trăng:</strong> Số 16, Đường Trần Hưng Đạo, Phường Phú Lợi, TP. Cần Thơ.</li>
+  <li><strong>Tây Ninh:</strong> 315A Trần Hưng Đạo, Khu phố 1, Phường Tân Ninh, Tỉnh Tây Ninh.</li>
+  <li><strong>An Giang:</strong> 64C Nguyễn Thái Học, phường Long Xuyên, An Giang.</li>
+  <li><strong>Bình Thuận:</strong> 343 Võ Văn Kiệt, Phường Phú Thủy, Tỉnh Lâm Đồng.</li>
+  <li><strong>Vĩnh Long:</strong> 51E Nguyễn Trung Trực, phường Tân Hạnh, Tỉnh Vĩnh Long.</li>
+  <li><strong>Bình Dương:</strong> 01 Huỳnh Văn Nghệ, Phường Phú Lợi, TP. Hồ Chí Minh.</li>
+  <li><strong>Trà Vinh:</strong> Số 54A Phạm Ngũ Lão, Phường Trà Vinh, Tỉnh Vĩnh Long.</li>
+  <li><strong>Long An:</strong> Số 120, Tuyến tránh Quốc lộ 1, phường Long An, tỉnh Tây Ninh.</li>
+  <li><strong>Hậu Giang:</strong> Số 151, đường 3 tháng 2, phường Vị Tân, TP. Cần Thơ.</li>
+  <li><strong>Bình Phước:</strong> 725 Quốc lộ 14, phường Bình Phước, tỉnh Đồng Nai.</li>
+  <li><strong>Tiền Giang:</strong> S5 Thủ Khoa Huân, Phường Mỹ Tho, Tỉnh Đồng Tháp.</li>
+  <li><strong>Kiên Giang:</strong> Số 94 Đường 3 Tháng 2, Phường Rạch Giá, tỉnh An Giang.</li>
+  <li><strong>Lâm Đồng:</strong> Số 4 - 6 Hồ Tùng Mậu, Phường Xuân Hương - Đà Lạt, Tỉnh Lâm Đồng.</li>
+</ul>
+
 
                 <p>Xin chúc mừng các bà con và cô bác đã có những giây phút thư giãn thoải mái và gặp nhiều thuận lợi với tờ vé số trên tay. Quý vị hãy luôn nhớ rằng mua vé số kiến thiết là một hình thức giải trí lành mạnh và mang ý nghĩa nhân văn sâu sắc. Mỗi tờ vé số bà con mua đều đóng góp một phần kinh phí vào ngân sách nhà nước để xây dựng thêm nhiều ngôi trường mới và các bệnh viện hiện đại giúp ích cho quê hương.</p>
 
@@ -493,15 +460,6 @@
                 <div class="related-box">
                     <span class="label">Xem thêm:</span> 
                     <a href="https://ethanvance.pixnet.net/blog/posts/931396561777342253" target="_blank" rel="noopener">Xổ số Tây Ninh mọi lúc mọi nơi đón xem kết quả</a>
-                </div>
-
-                <!-- Box Tác giả -->
-                <div class="author-box">
-                    <img src="https://sf-static.upanhlaylink.com/img/image_202608273e90e3a154519891cd881fc1d36bb17e.jpg" alt="Ethan Vance" class="author-avatar">
-                    <div class="author-info">
-                        <h4>Bài viết bởi Ethan Vance</h4>
-                        <p>Biên tập viên kinh nghiệm lâu năm, chia sẻ hướng dẫn tra cứu KQXSMN chuẩn xác và thông tin xổ số kiến thiết cho độc giả.</p>
-                    </div>
                 </div>
 
             </div>
@@ -512,11 +470,11 @@
         <nav class="post-navigation">
             <a href="#" class="nav-card prev">
                 <span class="nav-label">&laquo; Bài viết trước</span>
-                <span class="nav-title">Top 3 kinh nghiệm soi cầu XSMN chuẩn dành cho người mới</span>
+                <span class="nav-title">Tiêu đề bài 1</span>
             </a>
             <a href="#" class="nav-card next">
                 <span class="nav-label">Bài viết sau &raquo;</span>
-                <span class="nav-title">Lịch mở thưởng xổ số 3 miền chi tiết nhất tuần này</span>
+                <span class="nav-title">Tiêu đề bài 2</span>
             </a>
         </nav>
 
