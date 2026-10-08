@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KQXSMN: Cảnh báo lỗi dễ mắc và cách xem kết quả đúng chuẩn - Ethan Vance Blog</title>
+    <style>
+        :root {
+            --primary-color: #d32f2f;
+            --primary-hover: #b71c1c;
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-color: #222222;
+            --text-muted: #666666;
+            --border-color: #eee;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header Banner */
+        .header-banner-link {
+            display: block;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            text-decoration: none;
+        }
+
+        .header-banner-link img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 16px 10px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .header-title h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .header-title h1 a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .header-title h1 a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container Main Body */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
+
+        /* Custom Styles cho Trang Bài Viết Chi Tiết */
+        .post-detail-card {
+            background: var(--card-bg);
+            padding: 30px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+        }
+
+        .article-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            line-height: 1.35;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .article-sapo {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 12px 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #444444;
+            margin-bottom: 16px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .article-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Định dạng nội dung bài viết */
+        .article-body {
+            font-size: 1.05rem;
+            color: #333333;
+        }
+
+        .article-body p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .article-body h2 {
+            font-size: 1.35rem;
+            margin: 28px 0 14px 0;
+            color: #16a085;
+            border-bottom: 1px solid #16a085;
+            padding-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .article-body a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .article-body a:hover {
+            color: var(--primary-hover);
+        }
+
+        .article-body blockquote {
+            background-color: #f0f7ff;
+            border-left: 4px solid #2980b9;
+            margin: 20px 0;
+            padding: 12px 18px;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .article-body figure {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .article-body figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .article-body figcaption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .related-box {
+            background-color: #ebf5fb;
+            border: 1px dashed #2980b9;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 25px 0;
+        }
+
+        .related-box .label {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .related-box a {
+            color: #2980b9;
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .related-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hộp tác giả */
+        .author-box {
+            background: #fdf2f2;
+            border: 1px solid #f5c6c6;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #555;
+        }
+
+        /* Khối Điều Hướng Bài Trước / Bài Sau */
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .nav-card {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .nav-card.next {
+            text-align: right;
+        }
+
+        .nav-label {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .nav-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-color);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .nav-card:hover .nav-title {
+            color: var(--primary-color);
+        }
+
+        /* Footer & Social Links Styles */
+        footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 24px 16px;
+            font-size: 0.9rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #2a2a2a;
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .copyright-text {
+            color: #888888;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Mobile Adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 12px;
+                margin: 15px auto;
+            }
+            .post-detail-card {
+                padding: 20px 16px;
+            }
+            .article-title {
+                font-size: 1.4rem;
+            }
+            .author-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            .post-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-card.next {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Banner & Title -->
+    <header>
+        <a href="https://ethanvance.netlify.app/" class="header-banner-link" title="Trang chủ Blog Ethan Vance">
+            <img src="https://sf-static.upanhlaylink.com/img/image_202608273e90e3a154519891cd881fc1d36bb17e.jpg" alt="Header Banner Blog Ethan Vance">
+        </a>
+        <div class="header-title">
+            <h1><a href="https://ethanvance.netlify.app/">Ethan Vance Blog Xổ Số Thiên Phú</a></h1>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+        <!-- Thẻ chứa bài viết chi tiết -->
+        <article class="post-detail-card">
+            
+            <!-- Header của Bài Viết -->
+            <header class="article-header">
+                <h1 class="article-title">KQXSMN: Cảnh báo lỗi dễ mắc và cách xem kết quả đúng chuẩn</h1>
+                
+                <div class="article-sapo">
+                    Xem KQXSMN trực tiếp siêu tốc, tổng hợp các lỗi dễ nhìn nhầm kết quả xổ số miền Nam, cẩm nang dò vé đúng chuẩn, lịch mở thưởng và địa chỉ công ty XSKT.
+                </div>
+
+                <div class="article-meta">
+                    <span>✍️ Tác giả: <strong>Ethan Vance</strong></span>
+                    <span>📅 Đăng ngày: 08/10/2026</span>
+                    <span>⏱️ Thời gian đọc: 4 phút</span>
+                </div>
+            </header>
+
+            <!-- Nội dung chính của Bài Viết -->
+            <div class="article-body">
+                <p>Chào bà con và các cô bác thường xuyên theo dõi chương trình xổ số kiến thiết khu vực phía Nam khi tra cứu <a href="https://xosothienphu.vn/xsmn-xo-so-mien-nam-sxmn.html" target="_blank" rel="noopener" title="KQXSMN">KQXSMN</a>.</p>
+
+                <p>Việc cầm trên tay tờ vé số với hy vọng tìm thấy những niềm vui nho nhỏ đã trở thành thói quen giải trí quen thuộc của rất nhiều người dân chúng ta. Tuy nhiên trong quá trình đi làm biên tập viên lâu năm tôi đã chứng kiến không ít trường hợp anh chị vì chủ quan mà nhìn nhầm kết quả dẫn đến những nhầm lẫn đáng tiếc. Bài viết này tôi xin chia sẻ những kinh nghiệm thực tế để giúp quý vị xem số đúng cách và hiệu quả nhất.</p>
+
+                <h2>Những sai lầm phổ biến khi bà con xem kết quả xổ số miền Nam</h2>
+
+                <p>Lỗi đầu tiên và cũng là lỗi mà bà con dễ mắc phải nhất chính là nhìn nhầm đài mở thưởng trong ngày khi dò <strong>KQXSMN</strong>. Khu vực miền Nam của chúng ta mỗi ngày thường có từ 3 đến 4 đài cùng quay số một lúc nên nếu quý vị chỉ nhìn vào các con số mà quên mất tên tỉnh thành in trên vé thì rất dễ bị mừng hụt. Nhiều cô bác cầm vé đài Đồng Tháp nhưng lại đi dò vào bảng kết quả của đài TP.HCM chỉ vì thấy cả hai đều quay vào ngày Thứ Hai.</p>
+
+                <p>Lỗi thứ hai là nhầm lẫn giữa ngày mở thưởng và ngày in trên vé số. Một số bà con bận rộn công việc nên thường để dồn vài ngày mới đem vé ra dò một lần dẫn đến việc xem nhầm bảng kết quả của tuần trước hoặc ngày hôm sau. Ngoài ra việc nhìn nhầm thứ tự các giải thưởng từ giải tám đến giải đặc biệt cũng là điều mà các anh chị cần phải hết sức lưu ý để không bỏ sót bất kỳ cơ hội nào.</p>
+
+                <h2>Khung giờ vàng và lịch mở thưởng bà con cần ghi nhớ</h2>
+
+                <p>Để không bỏ lỡ những giây phút hồi hộp khi quay số trực tiếp bà con cần nhớ rõ khung giờ quay thưởng của xổ số miền Nam là từ 16h10 đến 16h45 hàng ngày.</p>
+
+                Quote tóm tắt
+                <blockquote>
+                    "Khung giờ quay thưởng trực tiếp XSMN diễn ra cố định từ 16h10 đến 16h45 hàng ngày."
+                </blockquote>
+
+                <p>Đây là khoảng thời gian các công ty xổ số kiến thiết sẽ tiến hành quay số công khai dưới sự giám sát của hội đồng. Nếu không có điều kiện ngồi trước màn hình tivi quý vị có thể mở điện thoại và truy cập vào Xổ Số Thiên Phú để xem tường thuật trực tiếp rất nhanh chóng và tiện lợi.</p>
+
+                <p>Lịch mở thưởng của các đài miền Nam trong tuần cụ thể như sau khi tra cứu dữ liệu hay xem <a href="https://xosothienphu.vn/xsmn-thu-3.html" target="_blank" rel="noopener" title="xổ số miền Nam thứ ba hàng tuần">xổ số miền Nam thứ ba hàng tuần</a>:</p>
+
+                <p><strong>Thứ Hai:</strong> TP.HCM, Đồng Tháp, Cà Mau</p>
+                <p><strong>Thứ Ba:</strong> Bến Tre, Vũng Tàu, Bạc Liêu</p>
+                <p><strong>Thứ Tư:</strong> Đồng Nai, Cần Thơ, Sóc Trăng</p>
+                <p><strong>Thứ Năm:</strong> Tây Ninh, An Giang, Bình Thuận</p>
+                <p><strong>Thứ Sáu:</strong> Vĩnh Long, Bình Dương, Trà Vinh</p>
+                <p><strong>Thứ Bảy:</strong> TP.HCM, Long An, Hậu Giang, Bình Phước</p>
+                <p><strong>Chủ Nhật:</strong> Tiền Giang, Kiên Giang, Đà Lạt</p>
+
+                <figure>
+                    <img src="https://sf-static.upanhlaylink.com/img/image_20261008dd9a5e9388d4ef0c8b741a5b18f8b811.jpg" alt="Tra cứu KQXSMN mượt mà trên di động">
+                    <figcaption>Nguồn: Ảnh internet</figcaption>
+                </figure>
+
+                <h2>Hướng dẫn các bước dò vé số đúng chuẩn tránh mất cơ hội</h2>
+
+                <p>Để đảm bảo không có bất kỳ sai sót nào xảy ra khi kiểm tra vé <strong>KQXSMN</strong>, bà con nên rèn luyện thói quen dò số theo một quy trình khoa học. Việc này không chỉ giúp quý vị tiết kiệm thời gian mà còn mang lại sự an tâm tuyệt đối. Bà con hãy thực hiện theo 3 bước hướng dẫn dưới đây nhé:</p>
+
+                <p><strong>Bước 1:</strong> Nhìn kỹ tên đài và ngày mở thưởng in trên tờ vé số để đối soát đúng với bảng kết quả trên trang Xổ Số Thiên Phú hoặc các bảng tin uy tín.</p>
+                <p><strong>Bước 2:</strong> So sánh dãy số trên vé theo thứ tự từ giải nhỏ nhất là giải tám tiến dần lên các giải lớn như giải nhất và giải đặc biệt.</p>
+                <p><strong>Bước 3:</strong> Kiểm tra kỹ các giải phụ đặc biệt và giải khuyến khích nếu tờ vé của anh chị chỉ khác một vài chữ số so với giải đặc biệt để chắc chắn không bỏ lỡ phần thưởng nào.</p>
+
+                <h2>Chi tiết cơ cấu giải thưởng xổ số miền Nam dành cho vé 10.000 VNĐ</h2>
+
+                <p>Để giúp bà con nắm rõ hơn về các mức thưởng mà mình có thể nhận được khi tra cứu <strong>KQXSMN</strong>, tôi xin liệt kê chi tiết các hạng giải dành cho loại vé 6 chữ số khu vực miền Nam hiện nay:</p>
+
+                <p><strong>01 Giải Đặc biệt:</strong> 2.000.000.000 VNĐ</p>
+                <p><strong>10 Giải Nhất:</strong> 30 triệu / giải</p>
+                <p><strong>10 Giải Nhì:</strong> 15 triệu / giải</p>
+                <p><strong>20 Giải Ba:</strong> 10 triệu / giải</p>
+                <p><strong>70 Giải Tư:</strong> 3 triệu / giải</p>
+                <p><strong>100 Giải Năm:</strong> 1 triệu / giải</p>
+                <p><strong>300 Giải Sáu:</strong> 400.000 VNĐ / giải</p>
+                <p><strong>1.000 Giải Bảy:</strong> 200.000 VNĐ / giải</p>
+                <p><strong>10.000 Giải Tám:</strong> 100.000 VNĐ / giải</p>
+                <p><strong>09 Giải Phụ Đặc biệt:</strong> 50 triệu / giải</p>
+                <p><strong>45 Giải Khuyến khích:</strong> 6 triệu / giải</p>
+
+                <figure>
+                    <img src="https://sf-static.upanhlaylink.com/img/image_2026100848a5e0a18dd89abdd425cbeec3067b8e.jpg" alt="Dò KQXSMN chuẩn xác tại Xổ Số Thiên Phú">
+                    <figcaption>Nguồn: Ảnh do Xổ Số Thiên Phú cung cấp</figcaption>
+                </figure>
+
+                <h2>Địa chỉ các công ty xổ số kiến thiết khu vực miền Nam</h2>
+
+                <p>Khi bà con có tin vui trúng thưởng sau khi đối chiếu kết quả <strong>KQXSMN</strong>, quý vị cần mang theo tờ vé số còn nguyên vẹn và giấy tờ tùy thân đến trực tiếp trụ sở các công ty để làm thủ tục nhận giải. Dưới đây là địa chỉ cụ thể của các công ty xổ số tại miền Nam:</p>
+
+                <p><strong>TP. Hồ Chí Minh:</strong> 77 Trần Nhân Tôn, Phường An Đông, TP. Hồ Chí Minh.</p>
+                <p><strong>Đồng Tháp:</strong> Số 01 Nguyễn Huệ, Phường Cao Lãnh, Tỉnh Đồng Tháp.</p>
+                <p><strong>Cà Mau:</strong> 09 Đường Phan Ngọc Hiển, Phường An Xuyên, Tỉnh Cà Mau.</p>
+                <p><strong>Bến Tre:</strong> Số 303A4, Đoàn Hoàng Minh, phường Phú Tân, tỉnh Vĩnh Long.</p>
+                <p><strong>Bà Rịa - Vũng Tàu:</strong> 31 Đường 3 Tháng 2, Phường Tam Thắng, TP. Hồ Chí Minh.</p>
+                <p><strong>Bạc Liêu:</strong> 07 Hai Bà Trưng, Phường Bạc Liêu, Tỉnh Cà Mau.</p>
+                <p><strong>Đồng Nai:</strong> 1894 Nguyễn Ái Quốc, Khu Phố 4, Phường Trấn Biên, Tỉnh Đồng Nai.</p>
+                <p><strong>Cần Thơ:</strong> Số 29, đường Cách Mạng Tháng Tám, phường Ninh Kiều, TP. Cần Thơ.</p>
+                <p><strong>Sóc Trăng:</strong> Số 16, Đường Trần Hưng Đạo, Phường Phú Lợi, TP. Cần Thơ.</p>
+                <p><strong>Tây Ninh:</strong> 315A Trần Hưng Đạo, Khu phố 1, Phường Tân Ninh, Tỉnh Tây Ninh.</p>
+                <p><strong>An Giang:</strong> 64C Nguyễn Thái Học, phường Long Xuyên, An Giang.</p>
+                <p><strong>Bình Thuận:</strong> 343 Võ Văn Kiệt, Phường Phú Thủy, Tỉnh Lâm Đồng.</p>
+                <p><strong>Vĩnh Long:</strong> 51E Nguyễn Trung Trực, phường Tân Hạnh, Tỉnh Vĩnh Long.</p>
+                <p><strong>Bình Dương:</strong> 01 Huỳnh Văn Nghệ, Phường Phú Lợi, TP. Hồ Chí Minh.</p>
+                <p><strong>Trà Vinh:</strong> Số 54A Phạm Ngũ Lão, Phường Trà Vinh, Tỉnh Vĩnh Long.</p>
+                <p><strong>Long An:</strong> Số 120, Tuyến tránh Quốc lộ 1, phường Long An, tỉnh Tây Ninh.</p>
+                <p><strong>Hậu Giang:</strong> Số 151, đường 3 tháng 2, phường Vị Tân, TP. Cần Thơ.</p>
+                <p><strong>Bình Phước:</strong> 725 Quốc lộ 14, phường Bình Phước, tỉnh Đồng Nai.</p>
+                <p><strong>Tiền Giang:</strong> S5 Thủ Khoa Huân, Phường Mỹ Tho, Tỉnh Đồng Tháp.</p>
+                <p><strong>Kiên Giang:</strong> Số 94 Đường 3 Tháng 2, Phường Rạch Giá, tỉnh An Giang.</p>
+                <p><strong>Lâm Đồng:</strong> Số 4 - 6 Hồ Tùng Mậu, Phường Xuân Hương - Đà Lạt, Tỉnh Lâm Đồng.</p>
+
+                <p>Xin chúc mừng các bà con và cô bác đã có những giây phút thư giãn thoải mái và gặp nhiều thuận lợi với tờ vé số trên tay. Quý vị hãy luôn nhớ rằng mua vé số kiến thiết là một hình thức giải trí lành mạnh và mang ý nghĩa nhân văn sâu sắc. Mỗi tờ vé số bà con mua đều đóng góp một phần kinh phí vào ngân sách nhà nước để xây dựng thêm nhiều ngôi trường mới và các bệnh viện hiện đại giúp ích cho quê hương.</p>
+
+                <!-- Khối Xem Thêm -->
+                <div class="related-box">
+                    <span class="label">Xem thêm:</span> 
+                    <a href="https://ethanvance.pixnet.net/blog/posts/931396561777342253" target="_blank" rel="noopener">Xổ số Tây Ninh mọi lúc mọi nơi đón xem kết quả</a>
+                </div>
+
+                <!-- Box Tác giả -->
+                <div class="author-box">
+                    <img src="https://sf-static.upanhlaylink.com/img/image_202608273e90e3a154519891cd881fc1d36bb17e.jpg" alt="Ethan Vance" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Bài viết bởi Ethan Vance</h4>
+                        <p>Biên tập viên kinh nghiệm lâu năm, chia sẻ hướng dẫn tra cứu KQXSMN chuẩn xác và thông tin xổ số kiến thiết cho độc giả.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- Khối Điều Hướng Bài Viết Trước / Bài Viết Sau -->
+        <nav class="post-navigation">
+            <a href="#" class="nav-card prev">
+                <span class="nav-label">&laquo; Bài viết trước</span>
+                <span class="nav-title">Top 3 kinh nghiệm soi cầu XSMN chuẩn dành cho người mới</span>
+            </a>
+            <a href="#" class="nav-card next">
+                <span class="nav-label">Bài viết sau &raquo;</span>
+                <span class="nav-title">Lịch mở thưởng xổ số 3 miền chi tiết nhất tuần này</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <!-- Footer cố định Social Networks -->
+    <footer>
+        <div class="footer-socials">
+            <!-- Vercel -->
+            <a href="https://ethanvance.vercel.app/" target="_blank" rel="noopener" class="social-link" title="Vercel Blog">
+                <svg viewBox="0 0 512 512"><path d="M256 48L512 464H0L256 48z"/></svg>
+            </a>
+            <!-- Codeberg -->
+            <a href="https://ethanvance.codeberg.page/" target="_blank" rel="noopener" class="social-link" title="Codeberg">
+                <svg viewBox="0 0 24 24"><path d="M12 21.6c-4.8 0-8.8-3.6-9.5-8.3L12 3.8l9.5 9.5c-.7 4.7-4.7 8.3-9.5 8.3z"/></svg>
+            </a>
+            <!-- GitHub -->
+            <a href="https://ethanvance3.github.io/" target="_blank" rel="noopener" class="social-link" title="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <!-- Cloudflare Workers -->
+            <a href="https://ethanvance.tindd1009.workers.dev/" target="_blank" rel="noopener" class="social-link" title="Cloudflare Workers">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
+            </a>
+            <!-- X (Twitter) -->
+            <a href="https://x.com/ethanvance17" target="_blank" rel="noopener" class="social-link" title="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- Pinterest -->
+            <a href="https://www.pinterest.com/ethanvance2" target="_blank" rel="noopener" class="social-link" title="Pinterest">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+            </a>
+            <!-- Youtube -->
+            <a href="https://www.youtube.com/@xosothienphu" target="_blank" rel="noopener" class="social-link" title="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <!-- Mastodon -->
+            <a href="https://mastodon.social/@ethanvance" target="_blank" rel="noopener" class="social-link" title="Mastodon">
+                <svg viewBox="0 0 24 24"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.3-5.004C15.334.028 12 .008 12 .008s-3.334.02-5.968.301C3.352.703 1.085 2.735.734 5.313c-.417 3.085-.453 6.643-.075 9.778.261 2.164 1.34 4.246 3.49 5.093 2.17.854 4.634.985 6.942.827 2.164-.148 4.195-.733 6.014-1.848-.124-.555-.262-1.116-.41-1.67-.09-.347-.406-.59-.762-.572-1.442.072-2.884.095-4.327.027-1.46-.07-2.923-.284-4.32-.733-.314-.1-.497-.432-.423-.755.074-.323.385-.536.708-.475 2.656.495 5.38.583 8.067.243 1.983-.25 3.916-.893 5.688-1.876 1.066-1.554 1.31-3.488 1.4-5.323.14-2.83.053-5.672-.257-8.498zM17.65 13.9h-2.51v-5.27c0-1.12-.47-1.68-1.41-1.68-.94 0-1.41.56-1.41 1.68v2.86H9.68v-2.86c0-1.12-.47-1.68-1.41-1.68-.94 0-1.41.56-1.41 1.68v5.27H4.35V8.53c0-1.12.3-2.01.9-2.67.6-.66 1.4-1 2.4-1 1.16 0 2.03.44 2.61 1.32.58-.88 1.45-1.32 2.61-1.32 1 0 1.8.34 2.4 1 .6.66.9 1.55.9 2.67V13.9z"/></svg>
+            </a>
+            <!-- Vimeo -->
+            <a href="https://vimeo.com/ethanvance" target="_blank" rel="noopener" class="social-link" title="Vimeo">
+                <svg viewBox="0 0 24 24"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L4.85 9.873C4.24 7.632 3.518 6.512 2.684 6.512c-.179 0-.803.376-1.87 1.129L0 6.604c1.176-1.033 2.333-2.071 3.47-3.11 1.564-1.353 2.73-2.07 3.501-2.148 1.826-.179 2.957 1.07 3.393 3.746.471 2.879.802 4.654.992 5.326.643 2.977 1.353 4.467 2.13 4.467.608 0 1.518-.962 2.73-2.887 1.212-1.926 1.854-3.39 1.928-4.39.144-1.638-.46-2.458-1.815-2.458-.643 0-1.302.147-1.979.442 1.321-4.312 3.84-6.381 7.558-6.208 2.747.126 4.07 1.802 3.969 5.03z"/></svg>
+            </a>
+            <!-- Framer (Website) -->
+            <a href="https://ethanvance.framer.website/" target="_blank" rel="noopener" class="social-link" title="Framer Portfolio">
+                <svg viewBox="0 0 24 24"><path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z"/></svg>
+            </a>
+        </div>
+        <div class="copyright-text">
+            © xosothienphu.vn - Blog Ethan Vance
+        </div>
+    </footer>
+
+</body>
+</html>
